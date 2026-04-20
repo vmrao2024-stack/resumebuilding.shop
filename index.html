@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ResumePro | Resume Services</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body { margin:0; font-family: 'Segoe UI', sans-serif; background:#f4f6f9; }
+
+header {
+    background:#0f172a;
+    color:white;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+}
+
+nav a {
+    color:white;
+    margin-left:20px;
+    text-decoration:none;
+}
+
+.hero {
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    padding:100px 20px;
+    text-align:center;
+}
+
+.hero h1 { font-size:40px; }
+
+.btn {
+    padding:12px 25px;
+    background:#22c55e;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+    margin:10px;
+    display:inline-block;
+}
+
+.section {
+    padding:50px 20px;
+    text-align:center;
+}
+
+.card {
+    background:white;
+    display:inline-block;
+    width:280px;
+    margin:15px;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+form {
+    max-width:400px;
+    margin:auto;
+    text-align:left;
+}
+
+input, textarea {
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+
+footer {
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:15px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>ResumePro</h2>
+<nav>
+<a href="#">Home</a>
+<a href="#services">Services</a>
+<a href="#upload">Upload</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<section class="hero">
+<h1>Get Hired Faster 🚀</h1>
+<p>Professional ATS Resume for just ₹500</p>
+
+<a class="btn" href="#payment">Buy Now ₹500</a>
+
+<a class="btn"
+href="mailto:info@resumebuilding.shop?subject=Interested for your services&body=Hi Team,%0D%0AI saw your website and want to connect.">
+Enquiry
+</a>
+</section>
+
+<section class="section" id="services">
+<h2>Our Services</h2>
+
+<div class="card">
+<h3>Resume Writing</h3>
+<p>ATS-friendly resume that gets shortlisted</p>
+</div>
+
+<div class="card">
+<h3>LinkedIn Optimization</h3>
+<p>Professional branding</p>
+</div>
+
+<div class="card">
+<h3>Interview Prep</h3>
+<p>Crack HR & technical rounds</p>
+</div>
+
+</section>
+
+<!-- PAYMENT -->
+<section class="section" id="payment">
+<h2>Buy Resume Service</h2>
+<p>Pay ₹500 securely</p>
+
+<a class="btn" 
+href="https://rzp.io/l/YOUR-LINK-HERE" target="_blank">
+Pay ₹500
+</a>
+
+<p style="font-size:14px;">(Replace with your Razorpay link)</p>
+</section>
+
+<!-- UPLOAD FORM -->
+<section class="section" id="upload">
+<h2>Upload Your Resume</h2>
+
+<form action="mailto:info@resumebuilding.shop" method="post" enctype="multipart/form-data">
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="email" name="email" placeholder="Your Email" required>
+<input type="file" name="resume" required>
+
+<textarea name="message" placeholder="Any additional details"></textarea>
+
+<button class="btn" type="submit">Submit</button>
+</form>
+
+<p style="font-size:13px;">Note: File upload works best with desktop email apps</p>
+</section>
+
+<!-- BLOG -->
+<section class="section">
+<h2>Latest Career Insights</h2>
+<div id="blog"></div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+<h2>Contact Us</h2>
+
+<a class="btn"
+href="mailto:info@resumebuilding.shop?subject=Interested for your services&body=Hi Team,%0D%0AI saw your website and want to connect.">
+Email Us
+</a>
+
+</section>
+
+<footer>
+<p>© 2026 ResumePro</p>
+</footer>
+
+<script>
+async function loadBlogs(){
+    const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://in.indeed.com/career-advice/rss");
+    const data = await res.json();
+
+    let html="";
+    data.items.slice(0,3).forEach(i=>{
+        html+=`
+        <div class="card">
+        <h4>${i.title}</h4>
+        <p>${i.description.substring(0,100)}...</p>
+        <a href="${i.link}" target="_blank">Read More</a>
+        </div>`;
+    });
+
+    document.getElementById("blog").innerHTML=html;
+}
+loadBlogs();
+</script>
+
+</body>
+</html>
