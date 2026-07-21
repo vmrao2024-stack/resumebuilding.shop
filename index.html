@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>ResumePro | Resume Services</title>
+<title>ResumePro | 1:1 Personality Coaching & Resume Services</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body { margin:0; font-family: 'Segoe UI', sans-serif; background:#f4f6f9; }
+* { box-sizing: border-box; }
+body { margin:0; font-family: 'Segoe UI', sans-serif; background:#f4f6f9; color: #334155; }
 
 header {
     background:#0f172a;
@@ -14,22 +15,58 @@ header {
     padding:15px 40px;
     display:flex;
     justify-content:space-between;
+    align-items:center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 nav a {
     color:white;
     margin-left:20px;
     text-decoration:none;
+    font-weight: 500;
+    transition: color 0.2s;
 }
+
+nav a:hover { color: #38bdf8; }
 
 .hero {
     background:linear-gradient(135deg,#2563eb,#06b6d4);
     color:white;
-    padding:100px 20px;
+    padding:80px 20px;
     text-align:center;
 }
 
-.hero h1 { font-size:40px; }
+.hero h1 { font-size:40px; margin-bottom: 10px; }
+
+.badge-offer {
+    background: #f59e0b;
+    color: #0f172a;
+    font-weight: bold;
+    padding: 6px 16px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.price-tag {
+    font-size: 24px;
+    margin: 15px 0;
+}
+
+.original-price {
+    text-decoration: line-through;
+    opacity: 0.7;
+    margin-right: 8px;
+}
+
+.discount-price {
+    font-size: 32px;
+    font-weight: bold;
+    color: #4ade80;
+}
 
 .btn {
     padding:12px 25px;
@@ -37,46 +74,225 @@ nav a {
     color:white;
     text-decoration:none;
     border-radius:6px;
-    margin:10px;
+    margin:8px;
     display:inline-block;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
 }
 
+.btn-free {
+    background: #38bdf8;
+    color: #0f172a;
+}
+
+.btn-free:hover { background: #0284c7; color: white; }
+
+.btn:hover { background: #16a34a; transform: translateY(-1px); }
+
 .section {
-    padding:50px 20px;
+    padding:60px 20px;
     text-align:center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.bg-alt { background: #ffffff; }
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 25px;
 }
 
 .card {
     background:white;
-    display:inline-block;
     width:280px;
-    margin:15px;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    padding:25px 20px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.06);
+    border: 1px solid #e2e8f0;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-form {
-    max-width:400px;
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* TRAINING CARDS WITH HOVER / CLICK WINDOWS */
+.training-card {
+    position: relative;
+    background: white;
+    width: 270px;
+    padding: 25px 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+    border: 1px solid #e2e8f0;
+    text-align: left;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+.training-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(37, 99, 235, 0.15);
+    border-color: #3b82f6;
+}
+
+.badge {
+    background: #dbeafe;
+    color: #1e40af;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.training-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    color: #0f172a;
+}
+
+.training-card p {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.hover-hint {
+    font-size: 12px;
+    color: #2563eb;
+    font-weight: 600;
+    margin-top: auto;
+}
+
+.training-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0f172a;
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+.training-card:hover .training-details,
+.training-card:focus-within .training-details {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.training-details h4 {
+    margin: 0 0 8px 0;
+    color: #38bdf8;
+    font-size: 16px;
+}
+
+.training-details ul {
+    padding-left: 18px;
+    margin: 8px 0;
+    font-size: 13px;
+    color: #cbd5e1;
+    line-height: 1.5;
+}
+
+.training-details .deliverable {
+    background: rgba(255,255,255,0.1);
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #4ade80;
+    margin-top: 5px;
+}
+
+/* BOOKING & PAYMENT BOX */
+.booking-box {
+    max-width:600px;
     margin:auto;
-    text-align:left;
+    text-align:center;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border: 1px solid #e2e8f0;
 }
 
-input, textarea {
+.qr-code-img {
+    width: 220px;
+    height: 220px;
+    object-fit: contain;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 8px;
+    background: #fff;
+    margin: 15px auto;
+}
+
+.upi-tag {
+    background: #f1f5f9;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 15px;
+    color: #0f172a;
+    display: inline-block;
+    margin-bottom: 20px;
+    border: 1px dashed #cbd5e1;
+}
+
+label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #0f172a;
+    display: block;
+    text-align: left;
+    margin-top: 12px;
+}
+
+input {
     width:100%;
-    padding:10px;
-    margin:10px 0;
-    border-radius:5px;
-    border:1px solid #ccc;
+    padding:12px;
+    margin:6px 0 12px 0;
+    border-radius:6px;
+    border:1px solid #cbd5e1;
+    font-family: inherit;
+    font-size: 14px;
 }
 
 footer {
     background:#0f172a;
     color:white;
     text-align:center;
-    padding:15px;
+    padding:20px;
+    margin-top: 40px;
 }
 </style>
+
+<!-- Calendly External JavaScript -->
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
 </head>
 
 <body>
@@ -85,113 +301,258 @@ footer {
 <h2>ResumePro</h2>
 <nav>
 <a href="#">Home</a>
-<a href="#services">Services</a>
-<a href="#upload">Upload</a>
+<a href="#training">1:1 Training</a>
+<a href="#services">Resume Services</a>
+<a href="#booking">Book Slot</a>
 <a href="#contact">Contact</a>
 </nav>
 </header>
 
 <section class="hero">
-<h1>Get Hired Faster 🚀</h1>
-<p>Professional ATS Resume for just ₹500</p>
+  <span class="badge-offer">🔥 LIMITED PERIOD OFFER</span>
+  <h1>Stop Overthinking. Start Growing. 🚀</h1>
+  <p>1:1 Live Mentorship to figure out your path, build confidence, and get career-ready.</p>
 
-<a class="btn" href="#payment">Buy Now ₹500</a>
+  <div class="price-tag">
+    1-Hour Live Session: <span class="original-price">₹2,500</span> <span class="discount-price">₹500</span>
+  </div>
 
-<a class="btn"
-href="mailto:info@resumebuilding.shop?subject=Interested for your services&body=Hi Team,%0D%0AI saw your website and want to connect.">
-Enquiry
-</a>
+  <div>
+    <a class="btn btn-free" href="#booking">🎁 Book Session (Pay via Paytm/UPI)</a>
+  </div>
 </section>
 
-<section class="section" id="services">
-<h2>Our Services</h2>
+<!-- 1:1 TRAINING MODULE SECTION -->
+<section class="section bg-alt" id="training">
+<h2>1:1 Live Training Sessions</h2>
+<p style="color: #64748b; max-width: 650px; margin: 0 auto 10px;">
+  Stuck in life or confused about your next step? Choose a live 1:1 session with us.
+</p>
+<p style="color: #2563eb; font-weight: 600; margin-bottom: 30px;">
+  👇 Hover or tap any module to see what you get in your 1-hour call:
+</p>
 
-<div class="card">
-<h3>Resume Writing</h3>
-<p>ATS-friendly resume that gets shortlisted</p>
+<div class="card-container">
+
+  <!-- Module 1 -->
+  <div class="training-card" tabindex="0">
+    <div>
+      <span class="badge">1:1 SESSION 01</span>
+      <h3>The Anti-Overthink Blueprint</h3>
+      <p>Clear the head noise, stop doubting yourself, and make decisions fast.</p>
+    </div>
+    <div class="hover-hint">Hover / Tap to Peek Inside →</div>
+
+    <div class="training-details">
+      <div>
+        <h4>The Anti-Overthink Blueprint</h4>
+        <ul>
+          <li><strong>Break the Spiral:</strong> Stop worrying about "wrong" choices</li>
+          <li><strong>Cut External Noise:</strong> Do what you want, not what others expect</li>
+          <li><strong>Create Option C:</strong> Simple tricks to overcome mental block</li>
+        </ul>
+      </div>
+      <div class="deliverable">
+        📁 <strong>Bonus:</strong> 10-Min Clarity Template
+      </div>
+    </div>
+  </div>
+
+  <!-- Module 2 -->
+  <div class="training-card" tabindex="0">
+    <div>
+      <span class="badge">1:1 SESSION 02</span>
+      <h3>Find Your Vibe & Strengths</h3>
+      <p>Discover what you're naturally good at and build real confidence.</p>
+    </div>
+    <div class="hover-hint">Hover / Tap to Peek Inside →</div>
+
+    <div class="training-details">
+      <div>
+        <h4>Find Your Vibe & Strengths</h4>
+        <ul>
+          <li><strong>Your Core Strengths:</strong> Spot talents you take for granted</li>
+          <li><strong>Zeroing In:</strong> Find out what truly motivates you</li>
+          <li><strong>Self-Doubt Hack:</strong> Stop imposter syndrome in its tracks</li>
+        </ul>
+      </div>
+      <div class="deliverable">
+        📁 <strong>Bonus:</strong> Personal Strengths Matrix
+      </div>
+    </div>
+  </div>
+
+  <!-- Module 3 -->
+  <div class="training-card" tabindex="0">
+    <div>
+      <span class="badge">1:1 SESSION 03</span>
+      <h3>Turn Frustration into Fuel</h3>
+      <p>Transform bad days and setbacks into raw drive and energy.</p>
+    </div>
+    <div class="hover-hint">Hover / Tap to Peek Inside →</div>
+
+    <div class="training-details">
+      <div>
+        <h4>Turn Frustration into Fuel</h4>
+        <ul>
+          <li><strong>Use the Heat:</strong> Convert bad experiences into motivation</li>
+          <li><strong>Build Real Drive:</strong> Motivation that stays when hype dies</li>
+          <li><strong>Micro-Habits:</strong> Easy daily wins to build momentum</li>
+        </ul>
+      </div>
+      <div class="deliverable">
+        📁 <strong>Bonus:</strong> Daily Motivation Tracker
+      </div>
+    </div>
+  </div>
+
+  <!-- Module 4 -->
+  <div class="training-card" tabindex="0">
+    <div>
+      <span class="badge">1:1 SESSION 04</span>
+      <h3>Your Unstoppable Game Plan</h3>
+      <p>Walk away with a clear, step-by-step roadmap for the next 90 days.</p>
+    </div>
+    <div class="hover-hint">Hover / Tap to Peek Inside →</div>
+
+    <div class="training-details">
+      <div>
+        <h4>Your Unstoppable Game Plan</h4>
+        <ul>
+          <li><strong>Action First:</strong> Move forward even when nervous</li>
+          <li><strong>Boss Energy:</strong> Improve body language & vocal tone</li>
+          <li><strong>Daily Routine:</strong> Stay consistent without burning out</li>
+        </ul>
+      </div>
+      <div class="deliverable">
+        📁 <strong>Bonus:</strong> 90-Day Action Roadmap
+      </div>
+    </div>
+  </div>
+
 </div>
-
-<div class="card">
-<h3>LinkedIn Optimization</h3>
-<p>Professional branding</p>
-</div>
-
-<div class="card">
-<h3>Interview Prep</h3>
-<p>Crack HR & technical rounds</p>
-</div>
-
 </section>
 
-<!-- PAYMENT -->
-<section class="section" id="payment">
-<h2>Buy Resume Service</h2>
-<p>Pay ₹500 securely</p>
+<!-- 2. PAYMENT & CALENDLY BOOKING SECTION -->
+<section class="section" id="booking">
+<h2>Book Your 1:1 Live Slot</h2>
+<p style="color: #64748b; margin-bottom: 25px;">Complete the payment below using Paytm / PhonePe / GPay, then pick your preferred time slot.</p>
 
-<a class="btn" 
-href="https://rzp.io/l/YOUR-LINK-HERE" target="_blank">
-Pay ₹500
-</a>
+<div class="booking-box">
+  
+  <!-- STEP 1: PAYMENT CONTAINER -->
+  <div id="payment-step">
+    <h3 style="margin-top: 0; color: #0f172a;">Step 1: Scan & Pay ₹500</h3>
+    <p style="font-size: 14px; color: #64748b;">Scan using <strong>Paytm, PhonePe, Google Pay, or any UPI App</strong></p>
 
-<p style="font-size:14px;">(Replace with your Razorpay link)</p>
+    <!-- REPLACE WITH YOUR ACTUAL QR CODE IMAGE -->
+    <img src="YOUR_PAYTM_QR.jpg" alt="Paytm / PhonePe UPI QR Code" class="qr-code-img">
+
+    <div>
+      <span class="upi-tag">UPI ID: <strong>yourname@paytm</strong></span>
+    </div>
+
+    <form id="upi-confirm-form">
+      <label for="txn-id">Step 2: Enter Transaction / UTR ID after payment:</label>
+      <input type="text" id="txn-id" name="txn_id" placeholder="12-digit UTR or Transaction ID (e.g. 4029XXXX1234)" required>
+
+      <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Verify Payment & Pick Slot →</button>
+    </form>
+  </div>
+
+  <!-- STEP 2: EMBEDDED CALENDLY (Hidden initially, unlocked after payment verification) -->
+  <div id="calendly-step" style="display: none;">
+    <div style="background: #dcfce7; color: #15803d; padding: 12px; border-radius: 8px; font-weight: 600; margin-bottom: 20px;">
+      ✅ Payment Details Submitted! Please pick your preferred date & time slot below:
+    </div>
+
+    <!-- CALENDLY EMBEDDED INLINE WIDGET -->
+    <!-- REPLACE data-url WITH YOUR ACTUAL CALENDLY EVENT URL -->
+    <div 
+      class="calendly-inline-widget" 
+      data-url="https://calendly.com/YOUR_CALENDLY_USERNAME/YOUR_EVENT" 
+      style="min-width:320px; height:700px;">
+    </div>
+  </div>
+
+</div>
 </section>
 
-<!-- UPLOAD FORM -->
-<section class="section" id="upload">
-<h2>Upload Your Resume</h2>
+<!-- RESUME SERVICES SECTION -->
+<section class="section bg-alt" id="services">
+<h2>Professional Resume Services</h2>
 
-<form action="mailto:info@resumebuilding.shop" method="post" enctype="multipart/form-data">
-<input type="text" name="name" placeholder="Your Name" required>
-<input type="email" name="email" placeholder="Your Email" required>
-<input type="file" name="resume" required>
+<div class="card-container">
+  <div class="card">
+    <h3>Resume Writing</h3>
+    <p>ATS-friendly resume crafted by experts that gets shortlisted by recruiters.</p>
+  </div>
 
-<textarea name="message" placeholder="Any additional details"></textarea>
+  <div class="card">
+    <h3>LinkedIn Optimization</h3>
+    <p>Professional profile makeover to build authority and attract inbound offers.</p>
+  </div>
 
-<button <a class="btn" href="https://forms.gle/cc5aGmJguyYHiTSu8" target="_blank">
-Submit Details & Upload Resume
-    
-</a>
-
-<p style="font-size:13px;">Note: File upload works best with desktop email apps</p>
+  <div class="card">
+    <h3>Interview Prep</h3>
+    <p>Crack technical and HR behavioral rounds with proven frameworks.</p>
+  </div>
+</div>
 </section>
 
 <!-- BLOG -->
 <section class="section">
 <h2>Latest Career Insights</h2>
-<div id="blog"></div>
+<div id="blog" class="card-container"></div>
 </section>
 
 <!-- CONTACT -->
-<section class="section" id="contact">
+<section class="section bg-alt" id="contact">
 <h2>Contact Us</h2>
+<p>Have questions before booking? Reach out to us directly.</p>
 
 <a class="btn"
-href="mailto:info@resumebuilding.shop?subject=Interested for your services&body=Hi Team,%0D%0AI saw your website and want to connect.">
-Email Us
+href="mailto:mukeshrao.recruit@gmail.com?subject=Interested for 1:1 Training&body=Hi Team,%0D%0AI want to know more about the 1:1 live training sessions.">
+Email Us Now
 </a>
-
 </section>
 
 <footer>
-<p>© 2026 ResumePro</p>
+<p>© 2026 ResumePro. All rights reserved.</p>
 </footer>
 
 <script>
+// UNLOCK CALENDLY UPON UPI PAYMENT SUBMISSION
+document.getElementById("upi-confirm-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+  
+  // Hide payment details box
+  document.getElementById("payment-step").style.display = "none";
+  
+  // Show Calendly widget
+  document.getElementById("calendly-step").style.display = "block";
+});
+
+// BLOG RSS LOADER
 async function loadBlogs(){
-    const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://in.indeed.com/career-advice/rss");
-    const data = await res.json();
+    try {
+        const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://in.indeed.com/career-advice/rss");
+        const data = await res.json();
 
-    let html="";
-    data.items.slice(0,3).forEach(i=>{
-        html+=`
-        <div class="card">
-        <h4>${i.title}</h4>
-        <p>${i.description.substring(0,100)}...</p>
-        <a href="${i.link}" target="_blank">Read More</a>
-        </div>`;
-    });
+        let html="";
+        data.items.slice(0,3).forEach(i=>{
+            html+=`
+            <div class="card" style="text-align:left;">
+            <h4 style="margin-top:0;">${i.title}</h4>
+            <p style="font-size:13px; color:#64748b;">${i.description.replace(/<[^>]*>?/gm, '').substring(0,100)}...</p>
+            <a href="${i.link}" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:600; font-size:14px;">Read More →</a>
+            </div>`;
+        });
 
-    document.getElementById("blog").innerHTML=html;
+        document.getElementById("blog").innerHTML=html;
+    } catch(e) {
+        document.getElementById("blog").innerHTML="<p style='color:#64748b;'>Career insights loading soon...</p>";
+    }
 }
 loadBlogs();
 </script>
