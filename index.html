@@ -229,7 +229,7 @@ nav a:hover { color: #38bdf8; }
 
 /* BOOKING & PAYMENT BOX */
 .booking-box {
-    max-width:600px;
+    max-width:650px;
     margin:auto;
     text-align:center;
     background: white;
@@ -271,7 +271,7 @@ label {
     margin-top: 12px;
 }
 
-input {
+input, select {
     width:100%;
     padding:12px;
     margin:6px 0 12px 0;
@@ -318,7 +318,9 @@ footer {
   </div>
 
   <div>
-    <a class="btn btn-free" href="#booking">🎁 Book Session (Pay via Paytm/UPI)</a>
+    <a class="btn btn-free" href="#booking" onclick="selectSession('free')">🎁 Book Free 15-Min Session</a>
+    <a class="btn" href="#booking" onclick="selectSession('paid')">⚡ Book 1-Hour Session (₹500)</a>
+    <a class="btn" href="#booking" onclick="selectSession('resume')">📄 Resume Services (₹500)</a>
   </div>
 </section>
 
@@ -436,42 +438,63 @@ footer {
 <!-- 2. PAYMENT & CALENDLY BOOKING SECTION -->
 <section class="section" id="booking">
 <h2>Book Your 1:1 Live Slot</h2>
-<p style="color: #64748b; margin-bottom: 25px;">Complete the payment below using Paytm / PhonePe / GPay, then pick your preferred time slot.</p>
+<p style="color: #64748b; margin-bottom: 25px;">Select your preferred session type below to proceed.</p>
 
 <div class="booking-box">
-  
-  <!-- STEP 1: PAYMENT CONTAINER -->
-  <div id="payment-step">
-    <h3 style="margin-top: 0; color: #0f172a;">Step 1: Scan & Pay ₹500</h3>
-    <p style="font-size: 14px; color: #64748b;">Scan using <strong>Paytm, PhonePe, Google Pay, or any UPI App</strong></p>
 
-    <!-- REPLACE WITH YOUR ACTUAL QR CODE IMAGE -->
-    <img src="7532834509.tc@trans.jpeg" alt="Paytm / PhonePe UPI QR Code" class="qr-code-img">
+  <!-- SESSION TYPE SELECTOR WITH 3 OPTIONS -->
+  <label for="session-select">Select Session Type:</label>
+  <select id="session-select" onchange="toggleSessionType()">
+    <option value="free">🎁 FREE 15-Minute Introductory Call</option>
+    <option value="paid">⚡ 1-Hour Live Mentorship Session (₹500)</option>
+    <option value="resume">📄 Resume Services (₹500)</option>
+  </select>
 
-    <div>
-      <span class="upi-tag">UPI ID: <strong>7532834509.tc@trans</strong></span>
+  <!-- STEP A: FREE 15-MIN SESSION (Direct Calendly Embed) -->
+  <div id="free-session-step">
+    <div style="background: #e0f2fe; color: #0369a1; padding: 12px; border-radius: 8px; font-weight: 600; margin: 20px 0;">
+      🎁 Free 15-Minute Session selected. Pick your date & time below:
     </div>
 
-    <form id="upi-confirm-form">
-      <label for="txn-id">Step 2: Enter Transaction / UTR ID after payment:</label>
-      <input type="text" id="txn-id" name="txn_id" placeholder="12-digit UTR or Transaction ID (e.g. 4029XXXX1234)" required>
-
-      <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Verify Payment & Pick Slot →</button>
-    </form>
-  </div>
-
-  <!-- STEP 2: EMBEDDED CALENDLY (Hidden initially, unlocked after payment verification) -->
-  <div id="calendly-step" style="display: none;">
-    <div style="background: #dcfce7; color: #15803d; padding: 12px; border-radius: 8px; font-weight: 600; margin-bottom: 20px;">
-      ✅ Payment Details Submitted! Please pick your preferred date & time slot below:
-    </div>
-
-    <!-- CALENDLY EMBEDDED INLINE WIDGET -->
-    <!-- REPLACE data-url WITH YOUR ACTUAL CALENDLY EVENT URL -->
+    <!-- CALENDLY LINK FOR 15-MIN FREE SESSION -->
     <div 
       class="calendly-inline-widget" 
-      data-url="https://calendly.com/resumebuilding-info/30min" 
+      data-url="https://calendly.com/resumebuilding-info/15min" 
       style="min-width:320px; height:700px;">
+    </div>
+  </div>
+
+  <!-- STEP B: PAID SESSIONS (Requires Paytm/UPI Payment) -->
+  <div id="paid-session-step" style="display: none;">
+    <div id="payment-details-wrapper">
+      <h3 style="margin-top: 15px; color: #0f172a;" id="payment-title">Step 1: Scan & Pay ₹500</h3>
+      <p style="font-size: 14px; color: #64748b;">Scan using <strong>Paytm, PhonePe, Google Pay, or any UPI App</strong></p>
+
+      <img src="7532834509.tc@trans.jpeg" alt="Paytm / PhonePe UPI QR Code" class="qr-code-img">
+
+      <div>
+        <span class="upi-tag">UPI ID: <strong>7532834509.tc@trans</strong></span>
+      </div>
+
+      <form id="upi-confirm-form">
+        <label for="txn-id">Step 2: Enter Transaction / UTR ID after payment:</label>
+        <input type="text" id="txn-id" name="txn_id" placeholder="12-digit UTR or Transaction ID (e.g. 4029XXXX1234)" required>
+
+        <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Verify Payment & Pick Slot →</button>
+      </form>
+    </div>
+
+    <!-- CALENDLY LINK FOR PAID SESSIONS (Unlocked after payment submission) -->
+    <div id="calendly-step-paid" style="display: none;">
+      <div style="background: #dcfce7; color: #15803d; padding: 12px; border-radius: 8px; font-weight: 600; margin: 20px 0;">
+        ✅ Payment Details Submitted! Please pick your preferred date & time slot below:
+      </div>
+
+      <div 
+        class="calendly-inline-widget" 
+        data-url="https://calendly.com/resumebuilding-info/60min" 
+        style="min-width:320px; height:700px;">
+      </div>
     </div>
   </div>
 
@@ -522,15 +545,47 @@ Email Us Now
 </footer>
 
 <script>
-// UNLOCK CALENDLY UPON UPI PAYMENT SUBMISSION
+// TOGGLE BETWEEN FREE AND PAID BOOKING FLOWS
+function toggleSessionType() {
+  const sessionVal = document.getElementById("session-select").value;
+  const freeStep = document.getElementById("free-session-step");
+  const paidStep = document.getElementById("paid-session-step");
+  const paymentTitle = document.getElementById("payment-title");
+
+  // Reset payment view when switching options
+  document.getElementById("payment-details-wrapper").style.display = "block";
+  document.getElementById("calendly-step-paid").style.display = "none";
+
+  if (sessionVal === "free") {
+    freeStep.style.display = "block";
+    paidStep.style.display = "none";
+  } else if (sessionVal === "resume") {
+    freeStep.style.display = "none";
+    paidStep.style.display = "block";
+    paymentTitle.innerText = "Step 1: Scan & Pay ₹500 for Resume Services";
+  } else {
+    freeStep.style.display = "none";
+    paidStep.style.display = "block";
+    paymentTitle.innerText = "Step 1: Scan & Pay ₹500 for 1-Hour Mentorship";
+  }
+}
+
+// PROGRAMMATICALLY SET SESSION FROM HERO BUTTONS
+function selectSession(type) {
+  const select = document.getElementById("session-select");
+  select.value = type;
+  toggleSessionType();
+}
+
+// UNLOCK CALENDLY UPON UPI PAYMENT SUBMISSION FOR PAID SESSION
 document.getElementById("upi-confirm-form").addEventListener("submit", function(e) {
   e.preventDefault();
   
-  // Hide payment details box
-  document.getElementById("payment-step").style.display = "none";
+  // Hide payment details wrapper
+  document.getElementById("payment-details-wrapper").style.display = "none";
   
   // Show Calendly widget
-  document.getElementById("calendly-step").style.display = "block";
+  document.getElementById("calendly-step-paid").style.display = "block";
 });
 
 // BLOG RSS LOADER
