@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<script data-goatcounter="https://murali.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-  <head>
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- IMPROVED SEO METAS -->
+<!-- HIDDEN PRIVATE VISITOR TRACKER (GOATCOUNTER) -->
+<script data-goatcounter="https://resumebuilding.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+<!-- SEO METAS -->
 <title>ResumePro | ATS Resume Writing & 1:1 Live Career Mentorship</title>
 <meta name="description" content="Get ATS-optimized resumes crafted by HR experts, 1-click PDF templates, LinkedIn profile building, and 1:1 live career mentorship. Book a free 15-min review today.">
 <meta name="keywords" content="ATS Resume Templates, Resume Writing Service, 1:1 Mentorship, Career Coaching, LinkedIn Profile Building, Freshers Resume, Working Professional Coaching">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://resumebuilding.shop">
 
-<!-- ENHANCED OPEN GRAPH TAGS -->
+<!-- OPEN GRAPH TAGS -->
 <meta property="og:title" content="Get Hired Faster with ATS Resumes & 1:1 Mentorship | ResumePro">
 <meta property="og:description" content="Land 3x more interviews with recruiter-approved ATS resumes, LinkedIn profile building, and 1:1 career mentorship for Freshers and Working Professionals.">
 <meta property="og:type" content="website">
@@ -397,7 +398,7 @@ footer { background: var(--dark); color: white; padding: 50px 20px 100px; font-s
 }
 </style>
 
-<!-- Calendly External JavaScript (Lazy Loaded) -->
+<!-- Calendly External JavaScript -->
 <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head>
 
@@ -536,7 +537,7 @@ footer { background: var(--dark); color: white; padding: 50px 20px 100px; font-s
   </div>
 </section>
 
-<!-- PRICING SECTION (UPDATED RATES) -->
+<!-- PRICING SECTION -->
 <section class="section bg-white" id="pricing">
   <div class="section-title">
     <h2>Transparent Mentorship & Service Packages</h2>
@@ -693,7 +694,7 @@ footer { background: var(--dark); color: white; padding: 50px 20px 100px; font-s
           <span class="upi-tag">UPI ID: <strong>7532834509.tc@trans</strong></span>
         </div>
 
-        <form id="upi-confirm-form">
+        <form id="upi-confirm-form" onsubmit="handlePaymentSubmit(event)">
           <label for="txn-id">Step 2: Enter Transaction / UTR ID after payment:</label>
           <input type="text" id="txn-id" name="txn_id" placeholder="12-digit UTR or Transaction ID" required>
           <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Verify Payment & Pick Slot →</button>
@@ -806,61 +807,67 @@ function toggleSessionType() {
   const paidStep = document.getElementById("paid-session-step");
   const paymentTitle = document.getElementById("payment-title");
 
-  document.getElementById("payment-details-wrapper").style.display = "block";
-  document.getElementById("calendly-step-paid").style.display = "none";
-
   if (sessionVal === "free") {
     freeStep.style.display = "block";
     paidStep.style.display = "none";
-  } else if (sessionVal === "fresher") {
+  } else {
     freeStep.style.display = "none";
     paidStep.style.display = "block";
-    paymentTitle.innerText = "Step 1: Scan & Pay ₹500 (Freshers Package)";
-  } else if (sessionVal === "pro") {
-    freeStep.style.display = "none";
-    paidStep.style.display = "block";
-    paymentTitle.innerText = "Step 1: Scan & Pay ₹1,000 (Working Professional)";
-  } else if (sessionVal === "linkedin") {
-    freeStep.style.display = "none";
-    paidStep.style.display = "block";
-    paymentTitle.innerText = "Step 1: Scan & Pay ₹1,500 (LinkedIn Profile Building)";
+    
+    // Reset paid view
+    document.getElementById("payment-details-wrapper").style.display = "block";
+    document.getElementById("calendly-step-paid").style.display = "none";
+
+    // Set prices dynamically
+    if (sessionVal === "fresher") {
+      paymentTitle.innerText = "Step 1: Scan & Pay ₹500";
+    } else if (sessionVal === "pro") {
+      paymentTitle.innerText = "Step 1: Scan & Pay ₹1,000";
+    } else if (sessionVal === "linkedin") {
+      paymentTitle.innerText = "Step 1: Scan & Pay ₹1,500";
+    }
   }
 }
 
 function selectSession(type) {
-  const select = document.getElementById("session-select");
-  select.value = type;
+  document.getElementById("session-select").value = type;
   toggleSessionType();
 }
 
-// FORM SUBMISSIONS
-document.getElementById("upi-confirm-form").addEventListener("submit", function(e) {
-  e.preventDefault();
+function handlePaymentSubmit(event) {
+  event.preventDefault();
   document.getElementById("payment-details-wrapper").style.display = "none";
   document.getElementById("calendly-step-paid").style.display = "block";
-});
+}
 
-function handleFreeReview(e) {
-  e.preventDefault();
-  alert("Thank you! Please select a slot below to schedule your free 15-minute call.");
+function handleFreeReview(event) {
+  event.preventDefault();
+  alert("Thank you! Please pick your preferred slot in the calendar below.");
   window.location.hash = "booking";
   selectSession('free');
 }
 
-// FAQ ACCORDION
+// FAQ TOGGLE
 function toggleFaq(element) {
   const answer = element.nextElementSibling;
   const isVisible = answer.style.display === "block";
-  answer.style.display = isVisible ? "none" : "block";
-  element.querySelector("span").innerText = isVisible ? "+" : "-";
+  
+  // Close all answers
+  document.querySelectorAll('.faq-answer').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.faq-question span').forEach(el => el.innerText = '+');
+
+  if (!isVisible) {
+    answer.style.display = "block";
+    element.querySelector('span').innerText = '-';
+  }
 }
 
-// EXIT INTENT TRIGGER
-let exitTriggered = false;
-document.addEventListener("mouseleave", function(e) {
-  if (e.clientY < 10 && !exitTriggered) {
+// EXIT INTENT MODAL
+let modalShown = false;
+document.addEventListener("mouseleave", function (e) {
+  if (e.clientY < 0 && !modalShown) {
     document.getElementById("exit-modal").style.display = "flex";
-    exitTriggered = true;
+    modalShown = true;
   }
 });
 
@@ -868,9 +875,9 @@ function closeModal() {
   document.getElementById("exit-modal").style.display = "none";
 }
 
-function handleModalSubmit(e) {
-  e.preventDefault();
-  alert("Thank you! Check your inbox for the download link to your free ATS Resume Templates.");
+function handleModalSubmit(event) {
+  event.preventDefault();
+  alert("Template pack link sent to your email!");
   closeModal();
 }
 </script>
