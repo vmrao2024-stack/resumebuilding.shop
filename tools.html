@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- HIDDEN PRIVATE VISITOR TRACKER (GOATCOUNTER) -->
+<script data-goatcounter="https://resumebuilding.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+<!-- SEO METAS FOR TOOLS PAGE -->
+<title>Free AI Career & Resume Tools | ResumePro</title>
+<meta name="description" content="Use free career tools: ATS Resume Checker, Score Calculator, Cover Letter Generator, Headline Generator, Interview Questions, Salary Calculator & Notice Period Calculator.">
+<meta name="keywords" content="ATS Resume Checker Free, Resume Score Calculator, Cover Letter Generator, LinkedIn Headline Generator, Salary Calculator India, Notice Period Calculator">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://resumebuilding.shop/tools.html">
+
+<!-- OPEN GRAPH TAGS -->
+<meta property="og:title" content="Free Resume & Career Tools Suite | ResumePro">
+<meta property="og:description" content="Instant ATS keyword matcher, resume score calculator, cover letter generator, and notice period calculator. 100% free to use.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://resumebuilding.shop/tools.html">
+<meta property="og:image" content="https://resumebuilding.shop/og-image.jpg">
+
+<!-- PERFORMANCE & FONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* CSS RESET & VARIABLES (MATCHED TO MAIN SITE) */
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --secondary: #06b6d4;
+  --accent: #22c55e;
+  --dark: #0f172a;
+  --slate: #475569;
+  --light-bg: #f8fafc;
+  --card-bg: #ffffff;
+  --border: #e2e8f0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', system-ui, sans-serif; background: #f4f6f9; color: #334155; line-height: 1.6; }
+
+/* HEADER & NAV */
+header {
+  background: var(--dark);
+  color: white;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.logo { font-size: 22px; font-weight: 800; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+.logo span { color: var(--secondary); }
+
+nav { display: flex; gap: 20px; align-items: center; }
+nav a { color: #cbd5e1; text-decoration: none; font-weight: 500; font-size: 15px; transition: color 0.2s; padding: 6px 10px; }
+nav a:hover { color: #38bdf8; }
+
+.nav-cta { background: var(--primary); color: white !important; padding: 10px 20px; border-radius: 6px; font-weight: 600; }
+.nav-cta:hover { background: var(--primary-dark); }
+
+/* HERO BANNER FOR TOOLS */
+.tools-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1e40af 100%);
+  color: white;
+  padding: 60px 20px 40px;
+  text-align: center;
+}
+.tools-hero h1 { font-size: 36px; font-weight: 800; margin-bottom: 12px; }
+.tools-hero p { color: #cbd5e1; font-size: 16px; max-width: 700px; margin: 0 auto; }
+
+/* GENERAL CONTAINER */
+.section { padding: 50px 20px; max-width: 1200px; margin: 0 auto; }
+.bg-white { background: #ffffff; }
+
+/* TOOL TABS */
+.tools-tab-wrapper {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 25px;
+  border-bottom: 2px solid var(--border);
+}
+.tool-tab {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--slate);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.tool-tab.active, .tool-tab:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* TOOL PANEL STYLING */
+.tool-panel-container {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 35px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+.tool-panel { display: none; }
+.tool-panel.active { display: block; }
+.tool-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.tool-form-group { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; }
+.tool-form-group input, .tool-form-group select, .tool-form-group div { flex: 1; min-width: 200px; }
+.tool-panel textarea {
+  width: 100%;
+  height: 120px;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  font-family: inherit;
+  font-size: 13.5px;
+}
+label { font-weight: 600; font-size: 14px; color: var(--dark); display: block; margin-top: 10px; }
+input, select { width: 100%; padding: 12px; margin: 6px 0 12px 0; border-radius: 6px; border: 1px solid #cbd5e1; font-family: inherit; font-size: 14px; }
+
+/* BUTTONS */
+.btn {
+  padding: 12px 22px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn:hover { background: #16a34a; transform: translateY(-1px); }
+.btn-primary { background: var(--primary); }
+.btn-primary:hover { background: var(--primary-dark); }
+
+/* RESULT BOX & CONVERSION FOOTER */
+.tool-result-box {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+.tool-lead-cta {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px dashed #cbd5e1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* FOOTER */
+footer { background: var(--dark); color: white; padding: 50px 20px 50px; font-size: 14px; margin-top: 50px; }
+.footer-container { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; margin-bottom: 40px; }
+.footer-col h4 { font-size: 16px; margin-bottom: 15px; color: #38bdf8; }
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 10px; }
+.footer-col a { color: #94a3b8; text-decoration: none; }
+.footer-col a:hover { color: white; }
+.footer-bottom { border-top: 1px solid #334155; padding-top: 20px; text-align: center; color: #64748b; font-size: 13px; }
+
+@media (max-width: 768px) {
+  header { padding: 15px 20px; flex-direction: column; gap: 15px; }
+  nav { flex-wrap: wrap; justify-content: center; }
+  .tool-grid-2 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER & NAVIGATION -->
+<header>
+  <a href="index.html" class="logo">Resume<span>Pro</span></a>
+  <nav>
+    <a href="index.html#about">About Mentor</a>
+    <a href="index.html#benefits">Why Choose Us</a>
+    <a href="tools.html" style="color:#38bdf8;">Free Tools Hub</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="index.html#reviews">Reviews</a>
+    <a href="index.html#booking" class="nav-cta">Book Session</a>
+  </nav>
+</header>
+
+<!-- TOOLS HERO -->
+<section class="tools-hero">
+  <h1>Free AI Career & Resume Tools 🛠️</h1>
+  <p>Free, instant calculators and generators to help you bypass ATS software, optimize your resume, and prepare for interviews.</p>
+</section>
+
+<!-- MAIN TOOL SUITE SECTION -->
+<section class="section">
+  
+  <!-- TOOL TABS -->
+  <div class="tools-tab-wrapper">
+    <button class="tool-tab active" onclick="switchTool(event, 'tool-ats')">ATS Checker</button>
+    <button class="tool-tab" onclick="switchTool(event, 'tool-score')">Score Calculator</button>
+    <button class="tool-tab" onclick="switchTool(event, 'tool-headline')">Headline Gen</button>
+    <button class="tool-tab" onclick="switchTool(event, 'tool-cover')">Cover Letter</button>
+    <button class="tool-tab" onclick="switchTool(event, 'tool-interview')">Interview Prep</button>
+    <button class="tool-tab" onclick="switchTool(event, 'tool-salary')">Salary Calc</button>
+    <button class="tool-tab" onclick="switchTool(event, 'tool-notice')">Notice Period</button>
+    <button class="tool-tab" onclick="switchTool(event, 'tool-skills')">Skills Gen</button>
+  </div>
+
+  <!-- TOOL PANELS CONTAINER -->
+  <div class="tool-panel-container">
+
+    <!-- 1. ATS RESUME CHECKER -->
+    <div id="tool-ats" class="tool-panel active">
+      <h3 style="color:var(--dark);">ATS Keyword Match & Parser</h3>
+      <p style="font-size: 14px; color: var(--slate); margin-bottom: 15px;">Paste your resume text alongside the job description to check keyword alignment.</p>
+      <div class="tool-grid-2">
+        <textarea id="ats-resume" placeholder="Paste your Resume text here..."></textarea>
+        <textarea id="ats-jd" placeholder="Paste Job Description (JD) here..."></textarea>
+      </div>
+      <button class="btn btn-primary" onclick="runAtsChecker()" style="margin-top: 15px;">Analyze ATS Match</button>
+      <div id="ats-result" class="tool-result-box" style="display:none;"></div>
+    </div>
+
+    <!-- 2. RESUME SCORE CALCULATOR -->
+    <div id="tool-score" class="tool-panel">
+      <h3 style="color:var(--dark);">Instant Resume Quality Score</h3>
+      <p style="font-size: 14px; color: var(--slate); margin-bottom: 15px;">Paste your resume text to evaluate action verbs, formatting, and metric usage.</p>
+      <textarea id="score-resume" placeholder="Paste your full Resume text here..."></textarea>
+      <button class="btn btn-primary" onclick="runScoreCalculator()" style="margin-top: 15px;">Calculate Score</button>
+      <div id="score-result" class="tool-result-box" style="display:none;"></div>
+    </div>
+
+    <!-- 3. RESUME HEADLINE GENERATOR -->
+    <div id="tool-headline" class="tool-panel">
+      <h3 style="color:var(--dark);">LinkedIn & Resume Headline Generator</h3>
+      <div class="tool-form-group">
+        <input type="text" id="hl-role" placeholder="Target Job Title (e.g. Java Developer)">
+        <input type="text" id="hl-exp" placeholder="Years of Experience (e.g. 3, 5+)">
+        <input type="text" id="hl-skill" placeholder="Top Skill / Specialty (e.g. React.js)">
+      </div>
+      <button class="btn btn-primary" onclick="runHeadlineGen()" style="margin-top: 15px;">Generate Headlines</button>
+      <div id="headline-result" class="tool-result-box" style="display:none;"></div>
+    </div>
+
+    <!-- 4. COVER LETTER GENERATOR -->
+    <div id="tool-cover" class="tool-panel">
+      <h3 style="color:var(--dark);">AI Cover Letter Generator</h3>
+      <div class="tool-form-group">
+        <input type="text" id="cl-name" placeholder="Your Full Name">
+        <input type="text" id="cl-role" placeholder="Target Position">
+        <input type="text" id="cl-company" placeholder="Company Name">
+      </div>
+      <textarea id="cl-skills" placeholder="List 2-3 key achievements or core competencies..." style="margin-top: 10px;"></textarea>
+      <button class="btn btn-primary" onclick="runCoverLetterGen()" style="margin-top: 15px;">Generate Draft</button>
+      <div id="cover-result" class="tool-result-box" style="display:none;"></div>
+    </div>
+
+    <!-- 5. INTERVIEW QUESTION GENERATOR -->
+    <div id="tool-interview" class="tool-panel">
+      <h3 style="color:var(--dark);">Role-Based Interview Question Generator</h3>
+      <div class="tool-form-group">
+        <input type="text" id="iq-role" placeholder="Target Job Role (e.g. Data Analyst)">
+        <select id="iq-level">
+          <option value="fresher">Fresher / Entry Level</option>
+          <option value="mid">Mid Level (2-5 Years)</option>
+          <option value="senior">Senior / Leadership (6+ Years)</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" onclick="runInterviewGen()" style="margin-top: 15px;">Get Practice Questions</button>
+      <div id="interview-result" class="tool-result-box" style="display:none;"></div>
+    </div>
+
+    <!-- 6. SALARY CALCULATOR -->
+    <div id="tool-salary" class="tool-panel">
+      <h3 style="color:var(--dark);">In-Hand Salary & Take-Home Calculator (India)</h3>
+      <div class="tool-form-group">
+        <input type="number" id="sal-ctc" placeholder="Annual CTC (in ₹ Lacs, e.g. 10)">
+        <select id="sal-regime">
+          <option value="new">New Tax Regime</option>
+          <option value="old">Old Tax Regime</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" onclick="runSalaryCalc()" style="margin-top: 15px;">Calculate Monthly Take-Home</button>
+      <div id="salary-result" class="tool-result-box" style="display:none;"></div>
+    </div>
+
+    <!-- 7. NOTICE PERIOD CALCULATOR -->
+    <div id="tool-notice" class="tool-panel">
+      <h3 style="color:var(--dark);">Notice Period & Last Working Day Calculator</h3>
+      <div class="tool-form-group">
+        <div>
+          <label>Resignation Date:</label>
+          <input type="date" id="np-date">
+        </div>
+        <div>
+          <label>Notice Period (Days):</label>
+          <input type="number" id="np-days" value="90" placeholder="e.g. 30, 60, 90">
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="runNoticeCalc()" style="margin-top: 15px;">Calculate Last Working Day</button>
+      <div id="notice-result" class="tool-result-box" style="display:none;"></div>
+    </div>
+
+    <!-- 8. RESUME SKILLS GENERATOR -->
+    <div id="tool-skills" class="tool-panel">
+      <h3 style="color:var(--dark);">Industry Skill Keyword Extractor</h3>
+      <div class="tool-form-group">
+        <input type="text" id="sk-domain" placeholder="Domain / Industry (e.g. Digital Marketing, HR, Finance)">
+      </div>
+      <button class="btn btn-primary" onclick="runSkillsGen()" style="margin-top: 15px;">Get Recommended Skills</button>
+      <div id="skills-result" class="tool-result-box" style="display:none;"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-col">
+      <h4>ResumePro</h4>
+      <p style="color: #94a3b8; font-size: 13px; line-height: 1.6;">Empowering freshers and experienced professionals with ATS resume services, LinkedIn branding, and 1:1 mentorship.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html#about">About Mentor</a></li>
+        <li><a href="index.html#benefits">Why Choose Us</a></li>
+        <li><a href="tools.html">Free Career Tools</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+        <li><a href="index.html#booking">Book Slot</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal & Policies</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Refund Policy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact & Support</h4>
+      <p style="color: #94a3b8; font-size: 13px;">Email: info@resumebuilding.shop</p>
+      <p style="color: #94a3b8; font-size: 13px; margin-top: 6px;">Phone: +91 7532834509</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 ResumePro. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- TOOL LOGIC JAVASCRIPT -->
+<script>
+// SWITCH TABS
+function switchTool(evt, toolId) {
+  const tabs = document.querySelectorAll('.tool-tab');
+  const panels = document.querySelectorAll('.tool-panel');
+  tabs.forEach(tab => tab.classList.remove('active'));
+  panels.forEach(panel => panel.classList.remove('active'));
+  evt.currentTarget.classList.add('active');
+  document.getElementById(toolId).classList.add('active');
+}
+
+// CTA CONVERSION FOOTER IN RESULTS
+function getToolCtaHtml() {
+  return `
+    <div class="tool-lead-cta">
+      <span style="font-size:13px; font-weight:600; color:var(--dark);">Need expert hands-on resume rewrite & 1:1 coaching?</span>
+      <a href="index.html#booking" class="btn btn-primary" style="font-size:12px; padding:8px 16px;">Book Session with V. Mukesh Rao (From ₹500)</a>
+    </div>
+  `;
+}
+
+// 1. ATS CHECKER
+function runAtsChecker() {
+  const resume = document.getElementById('ats-resume').value.toLowerCase();
+  const jd = document.getElementById('ats-jd').value.toLowerCase();
+  const resultBox = document.getElementById('ats-result');
+
+  if (!resume || !jd) return alert('Please enter both Resume and Job Description text.');
+
+  const jdWords = Array.from(new Set(jd.match(/\b[a-z]{3,}\b/g) || []));
+  const matched = [];
+  const missing = [];
+
+  jdWords.forEach(word => {
+    if (['with', 'that', 'from', 'have', 'this', 'your', 'will', 'for', 'and', 'the'].includes(word)) return;
+    if (resume.includes(word)) matched.push(word);
+    else missing.push(word);
+  });
+
+  const score = Math.round((matched.length / (matched.length + missing.length)) * 100) || 0;
+
+  resultBox.style.display = 'block';
+  resultBox.innerHTML = `
+    <h4 style="color: var(--dark); font-size:18px;">ATS Match Score: <span style="color: ${score >= 60 ? '#22c55e' : '#ef4444'}">${score}%</span></h4>
+    <p style="font-size: 13.5px; margin-top:5px;"><strong>Found Keywords (${matched.length}):</strong> ${matched.slice(0, 10).join(', ')}...</p>
+    <p style="font-size: 13.5px; margin-top:5px; color: #b91c1c;"><strong>Missing Top Keywords (${missing.length}):</strong> ${missing.slice(0, 10).join(', ')}</p>
+    ${getToolCtaHtml()}
+  `;
+}
+
+// 2. SCORE CALCULATOR
+function runScoreCalculator() {
+  const text = document.getElementById('score-resume').value;
+  const resultBox = document.getElementById('score-result');
+  if (!text) return alert('Please enter resume text.');
+
+  let score = 50;
+  const actionVerbs = ['managed', 'led', 'developed', 'increased', 'reduced', 'created', 'engineered', 'achieved'];
+  let verbCount = 0;
+  actionVerbs.forEach(v => { if (text.toLowerCase().includes(v)) verbCount++; });
+  
+  score += Math.min(verbCount * 5, 25);
+  if (/\d+%|\$\d+|\b\d+\b/.test(text)) score += 15;
+  if (text.length > 800) score += 10;
+  score = Math.min(score, 98);
+
+  resultBox.style.display = 'block';
+  resultBox.innerHTML = `
+    <h4 style="font-size:18px; color:var(--dark);">Overall Resume Score: <span style="color:var(--primary);">${score}/100</span></h4>
+    <ul style="font-size:13.5px; margin: 10px 0 0 20px; color: var(--slate);">
+      <li>Strong Action Verbs Found: <strong>${verbCount}</strong></li>
+      <li>Quantifiable Metrics Included: <strong>${/\d+/.test(text) ? 'Yes' : 'No (Add numbers for better impact)'}</strong></li>
+      <li>Resume Depth: <strong>${text.length > 800 ? 'Good' : 'Needs More Detail'}</strong></li>
+    </ul>
+    ${getToolCtaHtml()}
+  `;
+}
+
+// 3. HEADLINE GENERATOR
+function runHeadlineGen() {
+  const role = document.getElementById('hl-role').value || 'Software Engineer';
+  const exp = document.getElementById('hl-exp').value || '3+';
+  const skill = document.getElementById('hl-skill').value || 'Full-Stack Development';
+  const resultBox = document.getElementById('headline-result');
+
+  resultBox.style.display = 'block';
+  resultBox.innerHTML = `
+    <h4 style="font-size:16px; margin-bottom:8px; color:var(--dark);">Generated Headlines:</h4>
+    <p style="font-size:13.5px; background:#fff; padding:8px; border-radius:4px; border:1px solid #e2e8f0; margin-bottom:6px;">1. ${role} | ${exp} Years Exp in ${skill} | Driving Scalable Growth</p>
+    <p style="font-size:13.5px; background:#fff; padding:8px; border-radius:4px; border:1px solid #e2e8f0; margin-bottom:6px;">2. Results-Driven ${role} Specializing in ${skill} | Ex-Corporate Leadership</p>
+    <p style="font-size:13.5px; background:#fff; padding:8px; border-radius:4px; border:1px solid #e2e8f0;">3. Senior ${role} | Helping Organizations Optimize ${skill}</p>
+    ${getToolCtaHtml()}
+  `;
+}
+
+// 4. COVER LETTER GENERATOR
+function runCoverLetterGen() {
+  const name = document.getElementById('cl-name').value || 'Applicant';
+  const role = document.getElementById('cl-role').value || 'Target Role';
+  const company = document.getElementById('cl-company').value || 'Hiring Company';
+  const skills = document.getElementById('cl-skills').value || 'my expertise in leadership and execution';
+  const resultBox = document.getElementById('cover-result');
+
+  resultBox.style.display = 'block';
+  resultBox.innerHTML = `
+    <h4 style="font-size:16px; margin-bottom:8px; color:var(--dark);">Generated Cover Letter:</h4>
+    <div style="font-size:13px; white-space:pre-line; background:#fff; padding:12px; border:1px solid #e2e8f0; border-radius:4px; font-family:monospace;">
+Dear Hiring Manager at ${company},
+
+I am writing to express my interest in the ${role} position. With proven hands-on experience, I bring ${skills}.
+
+In my prior work, I have consistently delivered quantifiable business impact and operational efficiency. I look forward to contributing to ${company}.
+
+Sincerely,
+${name}
+    </div>
+    ${getToolCtaHtml()}
+  `;
+}
+
+// 5. INTERVIEW GENERATOR
+function runInterviewGen() {
+  const role = document.getElementById('iq-role').value || 'Professional';
+  const level = document.getElementById('iq-level').value;
+  const resultBox = document.getElementById('interview-result');
+
+  resultBox.style.display = 'block';
+  resultBox.innerHTML = `
+    <h4 style="font-size:16px; margin-bottom:8px; color:var(--dark);">Targeted Questions for ${role} (${level.toUpperCase()}):</h4>
+    <ol style="font-size:13.5px; margin-left:20px; color:var(--slate);">
+      <li>Describe a project where you took leadership as a ${role}.</li>
+      <li>How do you prioritize deliverables under short deadlines?</li>
+      <li>Walk me through a difficult stakeholder/client challenge you resolved.</li>
+      <li>What key metrics define your success in this role?</li>
+    </ol>
+    ${getToolCtaHtml()}
+  `;
+}
+
+// 6. SALARY CALCULATOR
+function runSalaryCalc() {
+  const ctc = parseFloat(document.getElementById('sal-ctc').value);
+  const resultBox = document.getElementById('salary-result');
+  if (!ctc) return alert('Please enter annual CTC in Lacs.');
+
+  const monthlyGross = (ctc * 100000) / 12;
+  const netInHand = Math.round(monthlyGross * 0.88); // Approx net after basic PF & taxes
+
+  resultBox.style.display = 'block';
+  resultBox.innerHTML = `
+    <h4 style="font-size:16px; color:var(--dark);">Estimated Take-Home: <span style="color:#22c55e;">₹${netInHand.toLocaleString('en-IN')} / month</span></h4>
+    <p style="font-size:12.5px; color:var(--slate); margin-top:4px;">*Calculation includes standard PF and baseline tax estimates.</p>
+    ${getToolCtaHtml()}
+  `;
+}
+
+// 7. NOTICE PERIOD CALCULATOR
+function runNoticeCalc() {
+  const dateVal = document.getElementById('np-date').value;
+  const days = parseInt(document.getElementById('np-days').value) || 90;
+  const resultBox = document.getElementById('notice-result');
+
+  if (!dateVal) return alert('Please select your resignation date.');
+
+  const resiDate = new Date(dateVal);
+  resiDate.setDate(resiDate.getDate() + days);
+
+  resultBox.style.display = 'block';
+  resultBox.innerHTML = `
+    <h4 style="font-size:16px; color:var(--dark);">Last Working Day (LWD): <span style="color:var(--primary);">${resiDate.toDateString()}</span></h4>
+    <p style="font-size:13px; color:var(--slate); margin-top:4px;">Total Duration: <strong>${days} Calendar Days</strong></p>
+    ${getToolCtaHtml()}
+  `;
+}
+
+// 8. SKILLS GENERATOR
+function runSkillsGen() {
+  const domain = document.getElementById('sk-domain').value || 'Technology';
+  const resultBox = document.getElementById('skills-result');
+
+  resultBox.style.display = 'block';
+  resultBox.innerHTML = `
+    <h4 style="font-size:16px; margin-bottom:8px; color:var(--dark);">Top ATS Keywords for ${domain}:</h4>
+    <div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">
+      <span style="background:#e0f2fe; color:#0369a1; padding:6px 14px; border-radius:20px; font-weight:700; font-size:12px;">Cross-Functional Collaboration</span>
+      <span style="background:#e0f2fe; color:#0369a1; padding:6px 14px; border-radius:20px; font-weight:700; font-size:12px;">Agile Execution</span>
+      <span style="background:#e0f2fe; color:#0369a1; padding:6px 14px; border-radius:20px; font-weight:700; font-size:12px;">Process Automation</span>
+      <span style="background:#e0f2fe; color:#0369a1; padding:6px 14px; border-radius:20px; font-weight:700; font-size:12px;">Stakeholder Management</span>
+      <span style="background:#e0f2fe; color:#0369a1; padding:6px 14px; border-radius:20px; font-weight:700; font-size:12px;">Data Analysis & Reporting</span>
+    </div>
+    ${getToolCtaHtml()}
+  `;
+}
+</script>
+</body>
+</html>
